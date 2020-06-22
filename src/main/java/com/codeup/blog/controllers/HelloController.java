@@ -13,10 +13,5 @@ public class HelloController {
         return "Hello from Spring!";
     }
 
-    @GetMapping("/welcome")
-    @ResponseBody
-    public String index() {
-        return "Welcome";
-    }
 }
 
