@@ -6,7 +6,10 @@
 </head>
 <body>
     <h1>Pick a Number</h1>
-    <h1>Number: <span th:text="${n}">0</span></h1>
+    <h1>Your Number: <span th:text="${n}">0</span></h1>
+    <h1>Random Number: <span th:text="${random}">0</span></h1>
+    <h1><span th:if="${guessed}">You Guessed the Number!!</span></h1>
+
     <h2><a href="/roll-dice/1">1</a></h2>
     <h2><a href="/roll-dice/2">2</a></h2>
     <h2><a href="/roll-dice/3">3</a></h2>
