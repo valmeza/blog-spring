@@ -12,7 +12,6 @@ public class DiceController {
 
     @GetMapping("/roll-dice")
     public String dice() {
-
         return "roll-dice";
     }
 
