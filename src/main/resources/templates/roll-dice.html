@@ -5,8 +5,8 @@
     <title>Roll Dice</title>
 </head>
 <body>
-    <header th:replace="fragments/head :: header"></header>
     <nav th:replace="fragments/head :: navbar"></nav>
+<div class="container">
     <h1>Pick a Number</h1>
     <h1>Your Number: <span th:text="${n}">0</span></h1>
     <h1>Random Number: <span th:text="${random}">0</span></h1>
@@ -20,5 +20,6 @@
     <h2><a href="/roll-dice/6">6</a></h2>
 
     <footer th:replace="fragments/head :: footer"></footer>
+</div>
 </body>
 </html>
