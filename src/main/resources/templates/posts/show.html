@@ -7,8 +7,14 @@
 <body>
 <nav th:replace="fragments/head :: navbar"></nav>
 <div class="container">
-    <h2 th:text="${p.title}"></h2>
-    <p th:text="${p.body}"></p>
+    <div th:if="${p == null}">
+        <p>Post Not Found!</p>
+    </div>
+    <div th:if="${p}">
+        <p th:text="${pId}">ID:</p>
+        <h2 th:text="${p.title}"></h2>
+        <p th:text="${p.body}"></p>
+    </div>
 </div>
 </body>
 </html>
