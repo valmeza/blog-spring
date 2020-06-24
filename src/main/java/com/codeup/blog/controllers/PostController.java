@@ -2,6 +2,7 @@ package com.codeup.blog.controllers;
 
 import com.codeup.blog.daos.PostsRepository;
 import com.codeup.blog.models.Post;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,17 +35,16 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String showForm() {
-        return "view the form for creating a post";
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String save() {
-        Post newPost = new Post("My first Blog", "My first Blog post!!");
+    public String save(@RequestParam(name="title") String title, @RequestParam(name="description") String description) {
+        Post newPost = new Post(title, description);
         postsDao.save(newPost);
-        return "Create a new post";
+        return "Posted!";
     }
 
     // this finds one and displays it in the form we want to edit
