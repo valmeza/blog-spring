@@ -36,6 +36,7 @@ public class PostController {
 
     @GetMapping("/posts/create")
     public String showForm() {
+
         return "posts/create";
     }
 
