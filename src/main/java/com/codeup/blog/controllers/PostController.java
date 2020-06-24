@@ -18,14 +18,14 @@ public class PostController {
         postsDao = postsRepository;
     }
 
-    @GetMapping("/post")
+    @GetMapping("/posts")
     public String index(Model model) {
         List<Post> posts = postsDao.findAll();
         model.addAttribute("posts", posts);
         return "posts/index";
     }
 
-    @GetMapping("/post/show/{id}")
+    @GetMapping("/posts/show/{id}")
     public String show(@PathVariable long id, Model model) {
         Post post = postsDao.getOne(id);
         model.addAttribute("pId", id);
@@ -33,13 +33,13 @@ public class PostController {
         return "posts/show";
     }
 
-    @GetMapping("/post/create")
+    @GetMapping("/posts/create")
     @ResponseBody
     public String showForm() {
         return "view the form for creating a post";
     }
 
-    @PostMapping("/post/create")
+    @PostMapping("/posts/create")
     @ResponseBody
     public String save() {
         Post newPost = new Post("My first Blog", "My first Blog post!!");
