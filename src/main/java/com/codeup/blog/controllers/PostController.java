@@ -1,7 +1,9 @@
 package com.codeup.blog.controllers;
 
 import com.codeup.blog.daos.PostsRepository;
+import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.Post;
+import com.codeup.blog.models.User;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +17,10 @@ public class PostController {
 
     // dependency injection
     private PostsRepository postsDao;
-    public PostController(PostsRepository postsRepository) {
+    private UsersRepository usersDao;
+    public PostController(PostsRepository postsRepository, UsersRepository usersRepository) {
         postsDao = postsRepository;
+        usersDao = usersRepository;
     }
 
     @GetMapping("/posts")
@@ -41,7 +45,8 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String save(@RequestParam(name="title") String title, @RequestParam(name="description") String description) {
-        Post newPost = new Post(title, description,null);
+        User currentUser = usersDao.getOne(1L);
+        Post newPost = new Post(title, description, currentUser, null, null);
         Post postInDb = postsDao.save(newPost);
         return "redirect:/posts/show/" + postInDb.getId();
     }
