@@ -40,11 +40,10 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
     public String save(@RequestParam(name="title") String title, @RequestParam(name="description") String description) {
         Post newPost = new Post(title, description);
-        postsDao.save(newPost);
-        return "Posted!";
+        Post postInDb = postsDao.save(newPost);
+        return "redirect:/posts/show/" + postInDb.getId();
     }
 
     // this finds one and displays it in the form we want to edit

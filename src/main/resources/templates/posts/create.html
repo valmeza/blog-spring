@@ -7,7 +7,7 @@
 <body>
 <nav th:replace="fragments/head :: navbar"></nav>
 <div class="container">
-    <form th:method="POST">
+    <form th:action="@{/posts/create}" th:method="POST">
         <label for="title">Title</label>
         <input id="title" name="title" type="text">
         <label for="description">Description</label>
