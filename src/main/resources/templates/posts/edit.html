@@ -14,7 +14,7 @@
         <input th:field="*{body}" type="text">
         <button>Save Changes</button>
     </form>
-    <form th:action="${'/posts/'+ post.id +'/delete'}" th:method="POST">
+    <form th:action="${'/posts/'+ post.id +'/delete'}" th:method="POST" th:object="${post}">
         <button class="btn btn-danger">Delete</button>
     </form>
 </div>

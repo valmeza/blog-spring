@@ -71,10 +71,11 @@ public class PostController {
     }
 
     @PostMapping("/posts/{id}/delete")
-    @ResponseBody
-    public String destroy(@PathVariable long id) {
-        postsDao.deleteById(id);
-        return "Post Deleted!";
+    public String destroy(@ModelAttribute Post deletePost) {
+        User currentUser = usersDao.getOne(1L);
+        deletePost.setOwner(currentUser);
+        postsDao.delete(deletePost);
+        return "redirect:/posts";
     }
 
     @GetMapping("/search")
