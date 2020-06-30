@@ -39,14 +39,15 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    public String showForm() {
+    public String showForm(Model viewModel) {
+        viewModel.addAttribute("post", new Post());
         return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String save(@RequestParam(name="title") String title, @RequestParam(name="description") String description) {
+    public String save(@RequestParam(name="title") String title, @RequestParam(name="body") String body) {
         User currentUser = usersDao.getOne(1L);
-        Post newPost = new Post(title, description, currentUser, null, null);
+        Post newPost = new Post(title, body, currentUser, null, null);
         Post postInDb = postsDao.save(newPost);
         return "redirect:/posts/show/" + postInDb.getId();
     }
