@@ -62,18 +62,12 @@ public class PostController {
     }
 
     @PostMapping("posts/{id}/edit")
-    @ResponseBody
-    public String update(@PathVariable long id,
-                         @RequestParam(name="title") String title,
-                         @RequestParam(name="description") String description) {
-        // find a post
-        Post found = postsDao.getOne(id); // select * from ads where id = ?
-        // edit the add
-        found.setTitle(title);
-        found.setBody(description);
+    public String update(@ModelAttribute Post editPost) {
         // save the changes
-        postsDao.save(found);
-        return "Post Updated!";
+        User currentUser = usersDao.getOne(1L);
+        editPost.setOwner(currentUser);
+        postsDao.save(editPost);
+        return "redirect:/posts/show/" + editPost.getId();
     }
 
     @PostMapping("/posts/{id}/delete")
