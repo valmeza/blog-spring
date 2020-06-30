@@ -4,6 +4,7 @@ import com.codeup.blog.daos.PostsRepository;
 import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.Post;
 import com.codeup.blog.models.User;
+import com.codeup.blog.services.EmailService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,12 @@ public class PostController {
     // dependency injection
     private PostsRepository postsDao;
     private UsersRepository usersDao;
-    public PostController(PostsRepository postsRepository, UsersRepository usersRepository) {
-        postsDao = postsRepository;
-        usersDao = usersRepository;
+    private final EmailService emailService;
+
+    public PostController(PostsRepository postsRepository, UsersRepository usersRepository, EmailService emailService) {
+        this.postsDao = postsRepository;
+        this.usersDao = usersRepository;
+        this.emailService = emailService;
     }
 
     @GetMapping("/posts")
@@ -49,6 +53,7 @@ public class PostController {
         User currentUser = usersDao.getOne(1L);
         savePost.setOwner(currentUser);
         Post postInDb = postsDao.save(savePost);
+        emailService.prepareAndSend(savePost, "A new post has been created!", "An post has been created with the id of " + currentUser);
         return "redirect:/posts/show/" + postInDb.getId();
     }
 
