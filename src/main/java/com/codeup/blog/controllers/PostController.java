@@ -45,10 +45,10 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String save(@RequestParam(name="title") String title, @RequestParam(name="body") String body) {
+    public String save(@ModelAttribute Post savePost) {
         User currentUser = usersDao.getOne(1L);
-        Post newPost = new Post(title, body, currentUser, null, null);
-        Post postInDb = postsDao.save(newPost);
+        savePost.setOwner(currentUser);
+        Post postInDb = postsDao.save(savePost);
         return "redirect:/posts/show/" + postInDb.getId();
     }
 
