@@ -6,6 +6,7 @@ import com.codeup.blog.models.Post;
 import com.codeup.blog.models.User;
 import com.codeup.blog.services.EmailService;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +51,7 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String save(@ModelAttribute Post savePost) {
-        User currentUser = usersDao.getOne(1L);
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         savePost.setOwner(currentUser);
         Post postInDb = postsDao.save(savePost);
         emailService.prepareAndSend(savePost, "A new post has been created!", "An post has been created with the id of " + currentUser);
@@ -69,7 +70,7 @@ public class PostController {
     @PostMapping("posts/{id}/edit")
     public String update(@ModelAttribute Post editPost) {
         // save the changes
-        User currentUser = usersDao.getOne(1L);
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         editPost.setOwner(currentUser);
         postsDao.save(editPost);
         return "redirect:/posts/show/" + editPost.getId();
@@ -77,7 +78,7 @@ public class PostController {
 
     @PostMapping("/posts/{id}/delete")
     public String destroy(@ModelAttribute Post deletePost) {
-        User currentUser = usersDao.getOne(1L);
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         deletePost.setOwner(currentUser);
         postsDao.delete(deletePost);
         return "redirect:/posts";
