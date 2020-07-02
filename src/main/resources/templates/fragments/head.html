@@ -2,10 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
-    <meta charset="UTF-8">
-    <title th:text="${title}">Blog</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
 
@@ -13,31 +16,51 @@
     <p>This is a header!!</p>
 </header>
 
-<nav class="navbar navbar-default" th:fragment="navbar">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <form action="/search">
-            <input type="text" name="search" placeholder="Search term">
-            <button class="btn btn-primary">Search</button>
-        </form>
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Blog</a>
+<!--<nav class="navbar navbar-default" th:fragment="navbar">-->
+<!--    <div class="container-fluid">-->
+<!--        &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+<!--        <form action="/search">-->
+<!--            <input type="text" name="search" placeholder="Search term">-->
+<!--            <button class="btn btn-primary">Search</button>-->
+<!--        </form>-->
+<!--        <div class="navbar-header">-->
+<!--            <a class="navbar-brand" href="/">Blog</a>-->
+<!--        </div>-->
+<!--        <ul class="nav navbar-nav navbar-right">-->
+<!--            <li><a href="/sign-up">Sign-Up!</a></li>-->
+<!--            <li><a href="/posts">Posts</a></li>-->
+<!--            <li><a href="/posts/create">Create</a></li>-->
+<!--            <li class="nav-item" sec:authorize="!isAuthenticated()">-->
+<!--                <a class="nav-link" href="/login">Login</a>-->
+<!--            </li>-->
+<!--            <li sec:authorize="isAuthenticated()">-->
+<!--                <span th:text="${#authentication.principal.username}"/>-->
+<!--                <form th:action="@{/logout}" th:method="post">-->
+<!--                    <button class="btn-link btn" style="margin-top: 8px">Logout</button>-->
+<!--                </form>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+<!--</nav>-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+    <a class="navbar-brand" href="/">My Blog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/sign-up">Sign-Up!</a>
+            <a class="nav-item nav-link" href="/posts">Posts</a>
+            <a class="nav-item nav-link" href="/posts/create">Create</a>
+            <a class="nav-link" href="/login" sec:authorize="!isAuthenticated()">Login</a>
+            <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true" sec:authorize="isAuthenticated()">Hello, <span th:text="${#authentication.principal.username}"/></a>
+            <form th:action="@{/logout}" th:method="post" sec:authorize="isAuthenticated()">
+                <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+            </form>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/sign-up">Sign-Up!</a></li>
-            <li><a href="/posts">Posts</a></li>
-            <li><a href="/posts/create">Create</a></li>
-            <li class="nav-item" sec:authorize="!isAuthenticated()">
-                <a class="nav-link" href="/login">Login</a>
-            </li>
-            <li sec:authorize="isAuthenticated()">
-                <span th:text="${#authentication.principal.username}"/>
-                <form th:action="@{/logout}" th:method="post">
-                    <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-                </form>
-            </li>
-        </ul>
-    </div><!-- /.container-fluid -->
+    </div>
 </nav>
 
 <footer th:fragment="footer">
