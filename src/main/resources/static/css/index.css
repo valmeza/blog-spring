@@ -1,0 +1,21 @@
+.home-page {
+    /* The image used */
+    background: url("/css/img/tea.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.logo {
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+}
+body {
+    font-family: 'Parisienne', cursive;
+    background: url("/css/img/background.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
