@@ -11,8 +11,12 @@
     height: 55px;
     width: 55px;
 }
+.card-body {
+    color: #333;
+}
 body {
-    font-family: 'Parisienne', cursive;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
     background: url("/css/img/background.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;

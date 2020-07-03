@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
-    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -25,11 +25,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/sign-up">Sign-Up!</a>
+            <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true" sec:authorize="isAuthenticated()">Hello, <span th:text="${#authentication.principal.username}"/></a>
+            <a class="nav-item nav-link" href="/sign-up" sec:authorize="!isAuthenticated()">Sign-Up!</a>
             <a class="nav-item nav-link" href="/posts">Posts</a>
             <a class="nav-item nav-link" href="/posts/create">Create</a>
             <a class="nav-link" href="/login" sec:authorize="!isAuthenticated()">Login</a>
-            <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true" sec:authorize="isAuthenticated()">Hello, <span th:text="${#authentication.principal.username}"/></a>
             <form th:action="@{/logout}" th:method="post" sec:authorize="isAuthenticated()">
                 <button class="btn-link btn" style="margin-top: 8px">Logout</button>
             </form>
