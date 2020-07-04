@@ -1,11 +1,3 @@
-.home-page {
-    /* The image used */
-    background: url("/css/img/tea.png") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
 .logo {
     border-radius: 50%;
     height: 55px;
@@ -15,11 +7,8 @@
     color: #333;
 }
 body {
-    font-family: 'Montserrat', sans-serif;
+    background-color: #001935;
     color: #fff;
-    background: url("/css/img/background.png") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    /*font-family: 'Bebas Neue', cursive;*/
+    /*font-family: 'Poppins', sans-serif;*/
 }
