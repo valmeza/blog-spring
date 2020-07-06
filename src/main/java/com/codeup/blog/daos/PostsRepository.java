@@ -13,6 +13,7 @@ public interface PostsRepository extends JpaRepository<Post, Long> {
     List<Post> searchByTitle(@Param("search") String search);
 
     // query methods
-    Post findFirstByTitle(String title); // Select * from posts whre title = ? Limit 1;
+    Post findFirstByTitle(String title); // Select * from posts where title = ? Limit 1;
 
+    Post findByTitle(String ad_to_be_deleted);
 }
