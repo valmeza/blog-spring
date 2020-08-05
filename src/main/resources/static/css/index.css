@@ -1,3 +1,18 @@
+.sign-up-title {
+    text-align: center;
+}
+
+.sign-up-btn {
+    margin-bottom: 10px;
+}
+
+.container {
+    margin-top: 20vh;
+    background-color: #fff;
+    color: #333;
+    border-radius: 10px;
+}
+
 .logo {
     border-radius: 50%;
     height: 55px;
@@ -6,9 +21,29 @@
 .card-body {
     color: #333;
 }
+
 body {
-    background-color: #001935;
+    background: url("/css/img/brightbackground.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     color: #fff;
-    /*font-family: 'Bebas Neue', cursive;*/
+    font-family: 'Bebas Neue', cursive;
     /*font-family: 'Poppins', sans-serif;*/
+}
+
+.home-page{
+    background: url("/css/img/ddhome.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.navbar-nav {
+    font-size: 1.2em;
+}
+.title {
+    color: #ff5c5c;
 }
