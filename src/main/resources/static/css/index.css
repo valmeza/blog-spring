@@ -1,8 +1,8 @@
-.sign-up-title {
+.sign-up-title, .login-title {
     text-align: center;
 }
 
-.sign-up-btn {
+.sign-up-btn, .login-btn {
     margin-bottom: 10px;
 }
 
