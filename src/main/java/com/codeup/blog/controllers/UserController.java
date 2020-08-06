@@ -2,6 +2,7 @@ package com.codeup.blog.controllers;
 
 import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,16 +12,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Controller
 public class UserController {
+
+    @Autowired
     private UsersRepository users;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
 
-    public UserController(UsersRepository users, PasswordEncoder passwordEncoder) {
-        this.users = users;
-        this.passwordEncoder = passwordEncoder;
-    }
+//    public UserController(UsersRepository users, PasswordEncoder passwordEncoder) {
+//        this.users = users;
+//        this.passwordEncoder = passwordEncoder;
+//    }
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
@@ -29,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User newUser, @Validated User user, Errors validation, Model model){
+    public String saveUser(@Validated User user, Errors validation, Model model){
         String username = user.getUsername();
         String email = user.getEmail();
         User userExists = users.findByUsername(username);
@@ -51,7 +57,7 @@ public class UserController {
 
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
-        users.save(newUser);
+        users.save(user);
         return "redirect:/login";
     }
 }

@@ -1,7 +1,8 @@
 package com.codeup.blog.models;
-import javax.validation.constraints.Email;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "users")
@@ -11,15 +12,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 100, unique = true)
-    @Email(message = "Email should be valid!")
-    @NotBlank(message = "Email can't be empty")
+    @Pattern(regexp = "([a-zA-Z0-9_.]+@[a-zA-Z0-9]+.[a-zA-Z]{2,3}[.] {0,1}[a-zA-Z]+)", message="email must be valid email address" )
+    @NotBlank(message = "Email can't be blank!")
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false, length = 50, unique = true)
     @NotBlank(message = "Username can't be blank")
     private String username;
 
+    @Pattern(regexp="^(?=.*?[A-Z])(?=.*?[0-9]).{8,}$",message="Password length must be at least 8 characters with one uppercase letter and one digit")
+    @NotBlank(message = "Password can't be blank!")
     @Column(nullable = false)
     private String password;
 
