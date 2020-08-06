@@ -1,6 +1,7 @@
 package com.codeup.blog.models;
-
+import javax.validation.constraints.Email;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -11,28 +12,36 @@ public class User {
     private long id;
 
     @Column(nullable = false, length = 100, unique = true)
+    @Email(message = "Email should be valid!")
+    @NotBlank(message = "Email can't be empty")
     private String email;
 
     @Column(nullable = false, length = 50, unique = true)
+    @NotBlank(message = "Username can't be blank")
     private String username;
 
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean isAdmin;
+
     public User() {
     }
 
-    public User(String email, String username, String password) {
+    public User(String email, String username, String password, boolean isAdmin) {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
-    public User(long id, String email, String username, String password) {
+    public User(long id, String email, String username, String password, boolean isAdmin) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
     public User(User copy) {
@@ -40,6 +49,7 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+        isAdmin = copy.isAdmin;
     }
 
     public long getId() {
@@ -72,5 +82,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
