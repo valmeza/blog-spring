@@ -1,4 +1,4 @@
-.sign-up-title, .login-title {
+.sign-up-title, .login-title, .single-post-title {
     text-align: center;
 }
 
@@ -30,6 +30,10 @@
 }
 .card-body {
     color: #333;
+}
+
+.err {
+    color: red;
 }
 
 body {

@@ -14,18 +14,23 @@
     <form th:action="@{/sign-up}" method="POST" th:object="${user}">
         <div class="form-group">
             <label for="username">Username</label>
+            <p class="err" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
             <input id="username" th:field="*{username}" class="form-control" required/>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
+            <p class="err" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
             <input id="email" th:field="*{email}" class="form-control" required/>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                else.</small>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
+            <p class="err" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             <input id="password" type="password" th:field="*{password}" class="form-control" required/>
         </div>
         <button type="submit" class="btn btn-primary sign-up-btn">Sign Up!</button>
+
     </form>
 </div>
 </body>
