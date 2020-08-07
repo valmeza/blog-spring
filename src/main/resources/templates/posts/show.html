@@ -15,6 +15,14 @@
         <h2 th:text="${p.title}"></h2>
         <p th:text="${p.body}"></p>
         <div>Created by <span th:text="${p.owner.username}"></span></div>
+        <div th:if="${#authentication.getPrincipal().isAdmin()}" id="button-container"
+             class="center-align">
+            <form th:action="${'/posts/'+ p.id +'/edit'}" th:method="GET" th:object="${p}">
+                <button id="edit-button"
+                        class="button-style blue-grey darken-4 btn waves-effect waves-light">Editf
+                </button>
+            </form>
+        </div>
     </div>
     <div id="disqus_thread"></div>
 </div>
