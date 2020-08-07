@@ -7,7 +7,7 @@
 }
 
 .container {
-    margin-top: 20vh;
+    margin-top: 5vh;
     background-color: #fff;
     color: #333;
     border-radius: 10px;
@@ -34,6 +34,10 @@
 
 .err {
     color: red;
+}
+
+#disqus_thread {
+    margin-bottom: 50px;
 }
 
 body {
