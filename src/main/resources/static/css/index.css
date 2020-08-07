@@ -1,9 +1,20 @@
-.sign-up-title, .login-title, .single-post-title {
+.sign-up-title, .login-title, .single-post-title, .post-title {
     text-align: center;
 }
 
-.sign-up-btn, .login-btn {
+.sign-up-btn, .login-btn, .btn-create {
     margin-bottom: 10px;
+}
+
+.invalid {
+    color: #ff5c5c;
+    text-align: center;
+}
+
+.logged-out {
+    text-align: center;
+    width: 100%;
+    background-color: #ff5c5c;
 }
 
 .container {
