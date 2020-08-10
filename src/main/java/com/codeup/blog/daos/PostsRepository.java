@@ -16,4 +16,7 @@ public interface PostsRepository extends JpaRepository<Post, Long> {
     Post findFirstByTitle(String title); // Select * from posts where title = ? Limit 1;
 
     Post findByTitle(String ad_to_be_deleted);
+
+//    @Query("from Post as a where a.queryHash like %:hash%")
+    Post findPostByQueryHash(String query);
 }
