@@ -5,13 +5,11 @@ import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.Post;
 import com.codeup.blog.models.User;
 import com.codeup.blog.services.EmailService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,10 +33,11 @@ public class PostController {
         return "posts/index";
     }
 
-    @GetMapping("/posts/show/{id}")
-    public String show(@PathVariable long id, Model model) {
-        Post post = postsDao.getOne(id);
-        model.addAttribute("pId", id);
+    @GetMapping("/posts/show/{hash}")
+    public String show(@PathVariable String hash, Model model) {
+        Post post = postsDao.findPostByQueryHash(hash);
+//        Post post = postsDao.getOne(id);
+        model.addAttribute("pId", post.getId());
         model.addAttribute("p", post);
         return "posts/show";
     }
@@ -52,10 +51,18 @@ public class PostController {
     @PostMapping("/posts/create")
     public String save(@ModelAttribute Post savePost) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String random = "";
+        int length = 15;
+        String hash = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+
+        for (int i = 0; i < length; i++) {
+            random += hash.charAt((int) Math.floor(Math.random() * hash.length()));
+        }
         savePost.setOwner(currentUser);
+        savePost.setQueryHash(random);
         Post postInDb = postsDao.save(savePost);
         emailService.prepareAndSend(savePost, "A new post has been created!", "An post has been created with the id of " + currentUser);
-        return "redirect:/posts/show/" + postInDb.getId();
+        return "redirect:/posts/show/" + postInDb.getQueryHash();
     }
 
     // this finds one and displays it in the form we want to edit
@@ -85,7 +92,7 @@ public class PostController {
     }
 
     @GetMapping("/search")
-    public String searchResults(Model model, @RequestParam(name="search") String search) {
+    public String searchResults(Model model, @RequestParam(name = "search") String search) {
         List<Post> posts = postsDao.searchByTitle(search);
         model.addAttribute("posts", posts);
         return "posts/index";

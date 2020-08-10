@@ -12,7 +12,7 @@
                 <h2 th:text="${post.title}">Title</h2>
                 <p th:text="${post.body}">Body</p>
                 <p>posted by <span th:text="${post.getOwner().username}"></span></p>
-                <p><a th:href="${'/posts/show/' + post.id}">View Full Post</a></p>
+                <p><a th:href="${'/posts/show/' + post.getQueryHash()}">View Full Post</a></p>
             </div>
         </div>
 </div>

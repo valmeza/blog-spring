@@ -1,9 +1,10 @@
 package com.codeup.blog.models;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="posts")
+@Table(name = "posts")
 public class Post {
 
     @Id
@@ -24,32 +25,38 @@ public class Post {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name="posts_categories",
+            name = "posts_categories",
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id")}
     )
     private List<PostCategory> categories;
 
+    @Column(nullable = false)
+    private String queryHash;
+
     // spring framework uses this empty constructor
-    public Post() {}
+    public Post() {
+    }
 
     //insert
-    public Post(String title, String body, User user, List<PostImage> postImages, List<PostCategory> postCategories) {
+    public Post(String title, String body, User user, List<PostImage> postImages, List<PostCategory> postCategories, String queryHash) {
         this.title = title;
         this.body = body;
         this.owner = user;
         this.images = postImages;
         this.categories = postCategories;
+        this.queryHash = queryHash;
     }
 
     // read
-    public Post(long id, String title, String body, User user, List<PostImage> postImages, List<PostCategory> postCategories) {
+    public Post(long id, String title, String body, User user, List<PostImage> postImages, List<PostCategory> postCategories, String queryHash) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.owner = user;
         this.images = postImages;
         this.categories = postCategories;
+        this.queryHash = queryHash;
     }
 
     public String getTitle() {
@@ -98,5 +105,13 @@ public class Post {
 
     public void setCategories(List<PostCategory> categories) {
         this.categories = categories;
+    }
+
+    public String getQueryHash() {
+        return queryHash;
+    }
+
+    public void setQueryHash(String queryHash) {
+        this.queryHash = queryHash;
     }
 }
